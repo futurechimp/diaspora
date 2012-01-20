@@ -47,6 +47,28 @@ da:
       duplicate: "Du har allerede delt indlægget!"
     search_for: "Søg efter {{name}}"
     show_more: "Vis mere"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "OK, jeg formoder #{{tagName}} ikke var så spændende igen..."
     timeago:
@@ -68,5 +90,3 @@ da:
     videos:
       unknown: "Ukendt videotype"
       watch: "Se denne video på {{provider}}"
-    web_sockets:
-      disconnected: "Forbindelse er lukket; indlæg vil ikke længere blive opdateret live."

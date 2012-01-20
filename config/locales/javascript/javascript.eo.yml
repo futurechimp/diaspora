@@ -47,6 +47,28 @@ eo:
       duplicate: "Nu, ĉu tiel bone? Vi jam rekonigis tiun afiŝon!"
     search_for: "Serĉi por {{name}}"
     show_more: "vidi plu"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Nu, mi supozas, ke #{{tagName}} ne estis tiel interese..."
     timeago:
@@ -68,5 +90,3 @@ eo:
     videos:
       unknown: "nekonata tipo de videaĵo"
       watch: "Vidi tiun ĉi videon je {{provider}}"
-    web_sockets:
-      disconnected: "La reta kontaktoskatolo estas fermita; afiŝoj ne plu rekte fluos."

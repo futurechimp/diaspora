@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_git_header if (AppConfig[:git_update] && AppConfig[:git_revision])
   before_filter :set_grammatical_gender
 
-  prepend_before_filter :clear_gc_stats
-
   inflection_method :grammatical_gender => :gender
 
   helper_method :all_aspects,
@@ -32,11 +30,9 @@ class ApplicationController < ActionController::Base
   # we need to do this for vanna controller.  these should really be controller
   # helper methods instead
   def set_header_data
-    if user_signed_in?
-      if request.format.html? && !params[:only_posts]
-        @notification_count = Notification.for(current_user, :unread =>true).count
-        @unread_message_count = ConversationVisibility.sum(:unread, :conditions => "person_id = #{current_user.person.id}")
-      end
+    if user_signed_in? && request.format.html? && !params[:only_posts]
+      @notification_count = Notification.for(current_user, :unread =>true).count
+      @unread_message_count = ConversationVisibility.sum(:unread, :conditions => "person_id = #{current_user.person.id}")
     end
   end
 
@@ -73,8 +69,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_git_header
-    headers['X-Git-Update'] = AppConfig[:git_update]
-    headers['X-Git-Revision'] = AppConfig[:git_revision]
+    headers['X-Git-Update'] = AppConfig[:git_update] if AppConfig[:git_update].present?
+    headers['X-Git-Revision'] = AppConfig[:git_revision] if AppConfig[:git_revision].present?
   end
 
   def set_locale
@@ -85,13 +81,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def clear_gc_stats
-    GC.clear_stats if GC.respond_to?(:clear_stats)
-  end
-
   def redirect_unless_admin
     unless current_user.admin?
-      redirect_to multi_url, :notice => 'you need to be an admin to do that'
+      redirect_to multi_stream_url, :notice => 'you need to be an admin to do that'
       return
     end
   end
@@ -119,7 +111,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    stored_location_for(:user) || (current_user.getting_started? ? getting_started_path : multi_path)
+    stored_location_for(:user) || (current_user.getting_started? ? getting_started_path : multi_stream_path)
   end
 
   def tag_followings
@@ -135,33 +127,7 @@ class ApplicationController < ActionController::Base
     @tags ||= current_user.followed_tags
   end
 
-  def save_sort_order
-    if params[:sort_order].present?
-      session[:sort_order] = (params[:sort_order] == 'created_at') ? 'created_at' : 'updated_at'
-    elsif session[:sort_order].blank?
-      session[:sort_order] = 'created_at'
-    else
-      session[:sort_order] = (session[:sort_order] == 'created_at') ? 'created_at' : 'updated_at'
-    end
-  end
-
-  def default_stream_action(stream_klass)
-    authenticate_user!
-    save_sort_order
-    @stream = stream_klass.new(current_user, :max_time => max_time, :order => sort_order)
-
-    if params[:only_posts]
-      render :partial => 'shared/stream', :locals => {:posts => @stream.stream_posts}
-    else
-      render 'aspects/index'
-    end
-  end
-
-  def sort_order
-    is_mobile_device? ? 'created_at' : session[:sort_order]
-  end
-
   def max_time
-    params[:max_time] ? Time.at(params[:max_time].to_i) : Time.now
+    params[:max_time] ? Time.at(params[:max_time].to_i) : Time.now + 1
   end
 end

@@ -46,6 +46,28 @@ ko:
       duplicate: "이미 재공유된 게시물입니다!"
     search_for: "{{name}} 검색"
     show_more: "더 보기"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "처리했습니다. #{{tagName}} 태그는 흥미롭지 않았군요?"
     timeago:
@@ -66,5 +88,3 @@ ko:
     videos:
       unknown: "알 수 없는 동영상 형식"
       watch: "동영상을 {{provider}}에서 보기"
-    web_sockets:
-      disconnected: "웹소켓이 닫혔습니다. 앞으로는 게시물이 실시간으로 제공되지 않습니다."

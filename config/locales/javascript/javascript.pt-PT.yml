@@ -47,6 +47,28 @@ pt-PT:
       duplicate: "Que bom, hein? Você já republicou essa mensagem!"
     search_for: "Procurar por {{name}}"
     show_more: "mostrar mais"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "OK, suponho que #{{tagName}} não era assim tão interessante..."
     timeago:
@@ -68,5 +90,3 @@ pt-PT:
     videos:
       unknown: "Formato de vídeo desconhecido"
       watch: "Visualize este vídeo no {{provider}}"
-    web_sockets:
-      disconnected: "A websocket está fechada; as publicações não serão distribuídas em directo."

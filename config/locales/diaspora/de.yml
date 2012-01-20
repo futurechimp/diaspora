@@ -576,6 +576,14 @@ de:
       destroy: Löschen
       not_found: "Entschuldige, wir konnten den Beitrag leider nicht finden."
       permalink: Permanentlink
+      photos_by:
+        few: "%{count} Fotos von %{author}"
+        many: "%{count} Fotos von %{author}"
+        one: "Ein Foto von %{author}"
+        other: "%{count} Fotos von %{author}"
+        two: "Zwei Fotos von %{author}"
+        zero: "Keine Fotos von %{author}"
+      reshare_by: "Weitergesagt von %{author}"
   previous: Vorherige
   privacy: Privatsphäre
   privacy_policy: Datenschutzrichtlinien
@@ -769,6 +777,7 @@ de:
       ignore_user: "%{name} ignorieren"
       ignore_user_description: "Diesen Benutzer ignorieren und aus allen Aspekten entfernen?"
       like: "Gefällt mir"
+      nsfw: "Dieser Post wurde vom Autor als NSFW markiert. %{link}"
       shared_with: "Geteilt mit: %{aspect_names}"
       show: zeigen
       unlike: "Gefällt mir nicht mehr"
@@ -805,7 +814,6 @@ de:
     comment_stream:
       contacts_title: "Leute, deren Beiträge du kommentiert hast"
       title: "Kommentierte Beiträge"
-    commented_on: kommentiert
     community_spotlight_stream: Gemeinschafts-Schaukasten
     followed_tag:
       add_a_tag: "Füge einen Tag hinzu"
@@ -815,17 +823,16 @@ de:
     followed_tags_stream: "#Tags, denen du folgst"
     like_stream:
       contacts_title: "Leute, deren Beiträge du magst"
+      title: "\"Gefällt mir\"-Stream"
     mentioned_stream: "@Erwähnungen"
     mentions:
       contacts_title: "Personen, die dich erwähnt haben"
       title: "@Erwähnungen"
     multi:
       contacts_title: "Personen in deinem Stream"
-    posted: veröffentlicht
     public:
       contacts_title: "Aktuelle Poster"
       title: "Öffentliche Aktivität"
-    recently: "zuletzt:"
     tags:
       contacts_title: "Personen, die diesen Tag nutzen"
       tag_prefill_text: "Das Interessante an %{tag_name} ist, dass …"
@@ -872,6 +879,8 @@ de:
       wrong_password: "Das eingegebene Kennwort stimmt nicht mit deinem aktuellen Kennwort überein."
     edit:
       also_commented: "… jemand ebenfalls den Beitrag eines Kontaktes kommentiert?"
+      auto_follow_aspect: "Aspekt für automatisch gefolgten Benutzern:"
+      auto_follow_back: "Folge Benutzern automatisch, wenn sie dir folgen"
       change: Ändern
       change_email: "E-Mail-Adresse ändern"
       change_language: "Sprache ändern"
@@ -893,6 +902,7 @@ de:
       edit_account: "Konto bearbeiten"
       email_awaiting_confirmation: "Wir haben dir einen Aktivierungslink zu %{unconfirmed_email} geschickt. Solange du dem Link nicht gefolgt bist und die neue Adresse aktiviert hast, werden wir weiterhin deine ursprüngliche E-Mail-Adresse %{email} verwenden."
       export_data: "Daten exportieren"
+      following: Folgen-Einstellungen
       getting_started: "Einstellungen für neue Nutzer"
       liked: "… wenn jemandem dein Beitrag gefällt?"
       mentioned: "… du in einem Beitrag erwähnt wirst?"
@@ -933,6 +943,8 @@ de:
       does_not_exist: "Benutzer %{username} existiert nicht!"
     update:
       email_notifications_changed: "E-Mail-Benachrichtigungen geändert"
+      follow_settings_changed: "Folgen-Einstellungen geändert"
+      follow_settings_not_changed: "Ändern der Folgen-Einstellungen fehlgeschlagen."
       language_changed: "Sprache geändert"
       language_not_changed: "Fehler beim Ändern der Sprache."
       password_changed: "Kennwort geändert. Du kannst dich nun mit deinem neuen Kennwort anmelden."

@@ -564,6 +564,13 @@ el:
     show:
       destroy: Διαγραφή
       not_found: "Λυπούμαστε, δεν καταφέραμε να βρούμε αυτή την ανάρτηση."
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   previous: προηγούμενο
   privacy: Απόρρητο
   privacy_policy: "Πολιτική Ιδιωτικού Απορρήτου"
@@ -756,6 +763,7 @@ el:
       ignore_user: "Αγνόηση %{name}"
       ignore_user_description: "Αγνόηση και αφαίρεση χρήστη από όλες τις πτυχές;"
       like: "Μου αρέσει"
+      nsfw: "Αυτή η δημοσίευση έχει σημανθεί ως μη ασφαλής για δουλειά από τον δημιουργό της. %{link}"
       shared_with: "Διαμοιρασμένο με: %{aspect_names}"
       show: εμφάνισε
       unlike: "Δεν μου αρέσει"
@@ -793,7 +801,6 @@ el:
     comment_stream:
       contacts_title: "Χρήστες των οποίων έχετε σχολιάσει αναρτήσεις"
       title: "Σχολιασμένες Αναρτήσεις"
-    commented_on: σχολιάστηκε
     community_spotlight_stream: "Αναρτήσεις Κοινότητας"
     followed_tag:
       add_a_tag: "Προσθήκη μιας ετικέτας"
@@ -810,11 +817,9 @@ el:
     multi:
       contacts_title: "Άτομα στη Ροή σας"
       title: Ροή
-    posted: αναρτήθηκε
     public:
       contacts_title: "Πρόσφατες Αφίσες"
       title: "Δημόσια Δραστηριότητα"
-    recently: "πρόσφατα:"
     tags:
       contacts_title: "Άτομα που τους αρέσει αυτή ή ετικέτα"
       tag_prefill_text: "Αυτό που σκέφτομαι για %{tag_name} είναι... "
@@ -862,6 +867,7 @@ el:
       wrong_password: "Ο κωδικός που εισάγατε δεν ταιριάζει με τον τωρινό κωδικό σας."
     edit:
       also_commented: "...κάποιος επίσης σχολίασε σε δημοσίευση επαφής σας;"
+      auto_follow_back: "Automatically follow back if a someone follows you"
       change: Αλλαγή
       change_email: "Αλλαγή διεύθυνσης ηλεκτρονικού ταχυδρομείου"
       change_language: "Αλλαγή Γλώσσας"
@@ -869,6 +875,12 @@ el:
       close_account:
         dont_go: "Εη, σε παρακαλώ μη φεύγεις!"
         if_you_want_this: "Εάν πραγματικά αυτό θες, γράψε το κωδικό σου παρακάτω και πάτα \"Κλείσιμο Λογαριασμού\""
+        lock_username: "Αυτό θα κλειδώσει το username σας αν προσπαθήσετε να επανεγγραφείτε."
+        locked_out: "Θα αποσυνδεθείτε και θα κλειδωθείτε έξω από τον λογαριασμό σας."
+        make_diaspora_better: "Θα επιθυμούσαμε να μας βοηθήσετε να κάνουμε το Diaspora καλύτερο αντί να φύγετε. Αν πράγματι θέλετε να φύγετε, θα θέλαμε να ξέρετε τι θα συμβεί στην συνέχεια."
+        mr_wiggles: "Ο κύριος Wiggles θα λυπηθεί να σας δει να αποχωρείτε"
+        no_turning_back: "Προς το παρών δεν υπάρχει γυρισμός."
+        what_we_delete: "Διαγράφουμε όλες τις δημοσιεύσεις και τα δεδομένα του προφίλ σας το συντομότερο δυνατόν. Τα σχόλιά σας δεν θα διαγραφούν, αλλά θα συνεχίσουν να υπάρχουν."
       close_account_text: "Κλείσιμο λογαριάσμου"
       comment_on_post: "...κάποιος σχολίασε την ανάρτησή σας?"
       current_password: "Τρέχον κωδικός πρόσβασης"

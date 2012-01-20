@@ -47,6 +47,28 @@ ru:
       duplicate: "Настолько круто, да? Вы уже поделились этой записью!"
     search_for: "Искать {{name}}"
     show_more: "показать больше"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Что ж, видимо, метка #{{tagName}} была не такой уж интересной..."
     timeago:
@@ -67,5 +89,3 @@ ru:
     videos:
       unknown: "Неизвестный видеоформат"
       watch: "Смотреть это видео на {{provider}}"
-    web_sockets:
-      disconnected: "WebSocket закрыт; сообщения больше не будут транслироваться в прямом эфире."

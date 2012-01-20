@@ -9,6 +9,40 @@ class Post < ActiveRecord::Base
   include Diaspora::Commentable
   include Diaspora::Shareable
 
+  attr_accessor :user_like
+
+  # NOTE API V1 to be extracted
+  acts_as_api
+  api_accessible :backbone do |t|
+    t.add :id
+    t.add :guid
+    t.add lambda { |post|
+      post.raw_message
+    }, :as => :text
+    t.add :public
+    t.add :created_at
+    t.add :comments_count
+    t.add :likes_count
+    t.add :reshares_count
+    t.add :last_three_comments
+    t.add :provider_display_name
+    t.add :author
+    t.add :post_type
+    t.add :image_url
+    t.add :object_url
+    t.add :root
+    t.add :o_embed_cache
+    t.add :user_like
+    t.add :mentioned_people
+    t.add lambda { |post|
+      if post.respond_to?(:photos)
+        post.photos
+      else
+        []
+      end
+    }, :as => :photos
+  end
+
   xml_attr :provider_display_name
 
   has_many :mentions, :dependent => :destroy
@@ -23,28 +57,54 @@ class Post < ActiveRecord::Base
   #scopes
   scope :includes_for_a_stream, includes(:o_embed_cache, {:author => :profile}, :mentions => {:person => :profile}) #note should include root and photos, but i think those are both on status_message
 
-  def self.excluding_blocks(user)
-    people = user.blocks.includes(:person).map{|b| b.person}
+  def post_type
+    self.class.name
+  end
 
-    if people.present?
-      where("posts.author_id NOT IN (?)", people.map { |person| person.id })
-    else
-      scoped
+  def raw_message; ""; end
+  def mentioned_people; []; end
+
+  # gives the last three comments on the post
+  def last_three_comments
+    return if self.comments_count == 0
+    self.comments.includes(:author => :profile).last(3)
+  end
+
+  def self.excluding_blocks(user)
+    people = user.blocks.map{|b| b.person_id}
+    scope = scoped
+
+    if people.any?
+      scope = scope.where("posts.author_id NOT IN (?)", people)
     end
+
+    scope
+  end
+
+  def self.excluding_hidden_shareables(user)
+    scope = scoped
+    if user.has_hidden_shareables_of_type?
+      scope = scope.where('posts.id NOT IN (?)', user.hidden_shareables["#{self.base_class}"])
+    end
+    scope
+  end
+
+  def self.excluding_hidden_content(user)
+    excluding_blocks(user).excluding_hidden_shareables(user)
   end
 
   def self.for_a_stream(max_time, order, user=nil)
     scope = self.for_visible_shareable_sql(max_time, order).
       includes_for_a_stream
 
-    scope = scope.excluding_blocks(user) if user.present?
+    scope = scope.excluding_hidden_content(user) if user.present?
 
     scope
   end
 
   #############
 
-  def self.diaspora_initialize params
+  def self.diaspora_initialize(params)
     new_post = self.new params.to_hash
     new_post.author = params[:author]
     new_post.public = params[:public] if params[:public]

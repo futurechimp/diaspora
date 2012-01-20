@@ -46,9 +46,11 @@ class Stream::Base
     Post.scoped
   end
 
-  # @return [ActiveRecord::Relation<Post>]
+  # @return [Array<Post>]
   def stream_posts
-    self.posts.for_a_stream(max_time, order, self.user)
+    self.posts.for_a_stream(max_time, order, self.user).tap do |posts|
+      like_posts_for_stream!(posts) #some sql person could probably do this with joins.
+    end
   end
 
   # @return [ActiveRecord::Association<Person>] AR association of people within stream's given aspects
@@ -63,7 +65,7 @@ class Stream::Base
     I18n.translate('aspects.selected_contacts.view_all_contacts')
   end
 
-  # @return [String]
+  # @return [String] def contacts_title 'change me in lib/base_stream.rb!'
   def contacts_title
     'change me in lib/base_stream.rb!'
   end
@@ -73,18 +75,12 @@ class Stream::Base
     Rails.application.routes.url_helpers.contacts_path
   end
 
-  #helpers
-  # @return [Boolean]
-  def ajax_stream?
-    false
-  end
-
   # @return [Boolean]
   def for_all_aspects?
     true
   end
 
-  #NOTE: MBS bad bad methods the fact we need these means our views are foobared. please kill them and make them 
+  #NOTE: MBS bad bad methods the fact we need these means our views are foobared. please kill them and make them
   #private methods on the streams that need them
   def aspects
     user.aspects
@@ -96,7 +92,7 @@ class Stream::Base
   end
 
   def aspect_ids
-    aspects.map{|x| x.id} 
+    aspects.map{|x| x.id}
   end
 
   def max_time=(time_string)
@@ -109,7 +105,23 @@ class Stream::Base
     @order ||= 'created_at'
   end
 
-  private
+  protected
+  # @return [void]
+  def like_posts_for_stream!(posts)
+    return posts unless @user
+
+    likes = Like.where(:author_id => @user.person.id, :target_id => posts.map(&:id), :target_type => "Post")
+
+    like_hash = likes.inject({}) do |hash, like|
+      hash[like.target_id] = like
+      hash
+    end
+
+    posts.each do |post|
+      post.user_like = like_hash[post.id]
+    end
+  end
+
   # @return [Hash]
   def publisher_opts
     {}

@@ -3,7 +3,6 @@
 #   the COPYRIGHT file.
 
 class StatusMessage < Post
-  include Diaspora::Socketable
   include Diaspora::Taggable
 
   include ActionView::Helpers::TextHelper
@@ -68,7 +67,7 @@ class StatusMessage < Post
   end
 
   def nsfw?
-    self.raw_message.include?('#nsfw')
+    self.raw_message.match(/#nsfw/i)
   end
 
   def formatted_message(opts={})
@@ -143,17 +142,6 @@ class StatusMessage < Post
     XML
   end
 
-  def socket_to_user(user_or_id, opts={})
-    unless opts[:aspect_ids]
-      user_id = user_or_id.instance_of?(Fixnum) ? user_or_id : user_or_id.id
-      aspect_ids = AspectMembership.connection.select_values(
-        AspectMembership.joins(:contact).where(:contacts => {:user_id => user_id, :person_id => self.author_id}).select('aspect_memberships.aspect_id').to_sql
-      )
-      opts.merge!(:aspect_ids => aspect_ids)
-    end
-    super(user_or_id, opts)
-  end
-
   def after_dispatch sender
     unless self.photos.empty?
       self.photos.update_all(:pending => false, :public => self.public)
@@ -184,11 +172,6 @@ class StatusMessage < Post
     self.oembed_url = urls.find{|url| ENDPOINT_HOSTS_STRING.match(URI.parse(url).host)}
   end
 
-  def update_photos_counter
-    StatusMessage.where(:id => self.id).
-      update_all(:photos_count => self.photos.count)
-  end
-
   protected
   def presence_of_content
     unless text_and_photos_blank?
@@ -200,6 +183,5 @@ class StatusMessage < Post
   def self.tag_stream(tag_ids)
     joins(:tags).where(:tags => {:id => tag_ids})
   end
-
 end
 

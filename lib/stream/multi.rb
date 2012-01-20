@@ -2,7 +2,7 @@ class Stream::Multi < Stream::Base
 
   # @return [String] URL
   def link(opts)
-    Rails.application.routes.url_helpers.multi_path(opts)
+    Rails.application.routes.url_helpers.multi_stream_path(opts)
   end
 
   # @return [String]
@@ -21,11 +21,6 @@ class Stream::Multi < Stream::Base
       post_ids += community_spotlight_post_ids if include_community_spotlight?
       Post.where(:id => post_ids)
     end.call
-  end
-
-  # @return [Boolean]
-  def ajax_stream?
-    false
   end
 
   #emits an enum of the groups which the post appeared

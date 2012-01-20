@@ -1,8 +1,15 @@
 class OEmbedCache < ActiveRecord::Base
   serialize :data
   attr_accessible :url
+  validates :data, :presence => true
 
   has_many :posts
+
+  # NOTE API V1 to be extracted
+  acts_as_api
+  api_accessible :backbone do |t|
+    t.add :data
+  end
 
   def self.find_or_create_by_url(url)
    cache = OEmbedCache.find_or_initialize_by_url(url)

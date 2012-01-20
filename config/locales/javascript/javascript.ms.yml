@@ -47,6 +47,28 @@ ms:
       duplicate: "Yang baik, kan? Anda telah berkongsi semula pos itu!"
     search_for: "Mencari {{name}}"
     show_more: "tunjuk lagi"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "OK, saya mengandaikan # {{tagName}} tidak semua yang menarik..."
     timeago:
@@ -68,5 +90,3 @@ ms:
     videos:
       unknown: "Jenis video tidak diketahui"
       watch: "Tonton video ini di {{provider}}"
-    web_sockets:
-      disconnected: "Websocket ditutup; pos tidak lagi akan distrim secara langsung."

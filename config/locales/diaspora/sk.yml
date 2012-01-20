@@ -102,7 +102,7 @@ sk:
         content_2: "Dajte ho hocikomu  a bude vás môcť nájsť na Diaspore."
         heading: "ID na Diasporu"
       donate: Prispieť
-      handle_explanation: "Toto je vaše id na Diasporu. Môžete ju dať ostatným ľuďom ako e-mailovú adresu, aby sa s vami mohli spojiť."
+      handle_explanation: "Toto je vaše ID na Diasporu. Môžete ho dať ostatným ľuďom ako e-mailovú adresu, aby sa s vami mohli spojiť."
       help:
         do_you: "Povedzte:"
         email_feedback: "Napíšte nám svoj názor na %{link}, ak uprednostňujete tento spôsob"
@@ -429,18 +429,18 @@ sk:
       two: "%{actors} vám poslali správu."
       zero: "%{actors} ľudí vám poslalo správu."
     reshared:
-      few: "%{actors} ľudí sa znova podelilo o %{post_link}."
-      many: "%{actors} sa znova podelilo o %{post_link}."
-      one: "%{actors} sa znova podelil o %{post_link}."
-      other: "%{actors} ľudí sa znova podelilo o %{post_link}."
-      two: "%{actors} ľudí sa znova podelilo o %{post_link}."
-      zero: "%{actors} ľudí sa znova podelilo o %{post_link}."
+      few: "%{actors} ľudí ukázalo %{post_link} priateľom."
+      many: "%{actors} ľudí ukázalo %{post_link} priateľom."
+      one: "%{actors} človek ukázal %{post_link} priateľom."
+      other: "%{actors} ľudí ukázalo %{post_link} priateľom."
+      two: "%{actors} ľudia ukázali %{post_link} priateľom."
+      zero: "%{actors} ľudí ukázalo %{post_link} priateľom."
     reshared_post_deleted:
-      few: "%{actors} sa znova podelili o váš vymazaný príspevok."
-      many: "%{actors} sa znova podelili o váš vymazaný príspevok."
-      one: "%{actors} sa znova podelil(a) o váš vymazaný príspevok."
+      few: "%{actors} ľudí ukázalo váš vymazaný príspevok priateľom."
+      many: "%{actors} ukázal(a) váš vymazaný príspevok priateľom."
+      one: "%{actors} človek ukázal váš vymazaný príspevok priateľom."
       other: "%{actors} ľudia ukázali váš vymazaný príspevok ďalším."
-      two: "%{actors} sa znova podelili o váš vymazaný príspevok."
+      two: "%{actors} ľudia ukázali váš vymazaný príspevok priateľom."
       zero: "%{actors} ľudí ukázalo príspevok ďalším."
     started_sharing:
       few: "%{actors} si vás pridali do kontaktov."
@@ -468,7 +468,7 @@ sk:
     private_message:
       reply_to_or_view: "Zobraziť tento rozhovor alebo sa doň zapojiť >"
     reshared:
-      reshared: "%{name} sa znova podelil(a) o váš príspevok"
+      reshared: "%{name} ukázal(a) váš príspevok priateľom"
       view_post: "Zobraziť príspevok >"
     single_admin:
       admin: "Váš administrátor"
@@ -576,6 +576,14 @@ sk:
       destroy: Odstrániť
       not_found: "Prepáčte, tento príspevok sa nepodarilo nájsť."
       permalink: "trvalý odkaz"
+      photos_by:
+        few: "%{count} fotiek, ktoré nahral(a) %{author}"
+        many: "%{count} fotiek, ktoré nahral(a) %{author}"
+        one: "Jedna fotka, ktorú nahral(a) %{author}"
+        other: "%{count} fotiek, ktoré nahral(a) %{author}"
+        two: "Dve fotky, ktoré nahral(a) %{author}"
+        zero: "Žiadne fotky, ktoré nahral(a) %{author}"
+      reshare_by: "Znova ukázal(a) príspevok %{author}"
   previous: Predchádzajúce
   privacy: "Ochrana súkromia"
   privacy_policy: "Ochrana osobných údajov"
@@ -649,20 +657,20 @@ sk:
     new_request_to_person:
       sent: Poslané!
   reshares:
-    comment_email_subject: "%{resharer} sa znova podelil(a) o príspevok použ. %{author}"
+    comment_email_subject: "%{resharer} ukázal(a) príspevok použ. %{author} priateľom"
     create:
       failure: "Pri pokuse znova sa podeliť o tento príspevok nastala chyba."
     reshare:
       deleted: "Pôvodný príspevok vymazal(a) jeho autor(ka)."
       reshare:
-        few: "%{count} ľudia ukázali príspevok ďalším"
-        many: "%{count} ľudia ukázali príspevok ďalším"
-        one: "1 človek sa znova podelil o príspevok"
-        other: "%{count} ľudia ukázali príspevok ďalším"
-        two: "%{count} sa znova podelili o príspevok"
+        few: "%{count} ľudia ukázali príspevok priateľom"
+        many: "%{count} opätovných zdieľaní"
+        one: "1 opätovné zdieľanie"
+        other: "%{count} opätovných zdieľaní"
+        two: "%{count} opätovné zdieľania"
         zero: "Znova zdieľať"
       reshare_confirmation: "Chcete sa znova podeliť o príspevok použ. %{author}?"
-      reshare_original: "Znovu zdieľať originál"
+      reshare_original: "Originál ukázať priateľom "
       reshared_via: "znova sa niekto podelil cez"
       show_original: "Zobraziť originál"
   search: Vyhľadávanie
@@ -806,7 +814,6 @@ sk:
     comment_stream:
       contacts_title: "Ľudia, ktorých príspevky ste okomentovali"
       title: "Okomentované príspevky"
-    commented_on: okomentované
     community_spotlight_stream: "V centre pozornosti komunity"
     followed_tag:
       add_a_tag: "Pridať značku"
@@ -824,11 +831,9 @@ sk:
     multi:
       contacts_title: "Ľudia na vašej nástenke"
       title: Nástenka
-    posted: odoslané
     public:
       contacts_title: "Autori najnovších príspevkov"
       title: "Verejná aktivita"
-    recently: "nedávno:"
     tags:
       contacts_title: "Ľudia, ktorí hľadajú tieto značky"
       tag_prefill_text: "%{tag_name} je... "
@@ -876,6 +881,8 @@ sk:
       wrong_password: "Zadané heslo sa nezhoduje  s vaším súčasným heslom."
     edit:
       also_commented: "...niekto okomentuje aj príspevok človeka vo vašich kontaktoch?"
+      auto_follow_aspect: "Kategória používateľov, ktorých sledujete automaticky:"
+      auto_follow_back: "Automaticky sledovať, ak niekto sleduje vás"
       change: Zmeniť
       change_email: "Zmeniť e-mail"
       change_language: "Zmeniť jazyk"
@@ -888,7 +895,7 @@ sk:
         make_diaspora_better: "Chceme, aby ste nám pomohli vylepšiť Diasporu, a tak by ste nám mali vypomôcť namiesto odchodu. Ak chcete odísť, chceme, aby ste vedeli, čo sa bude diať ďalej."
         mr_wiggles: "Pán Wiggles bude smutný, že odchádzate"
         no_turning_back: "Momentálne návrat neexistuje."
-        what_we_delete: "Zmažeme všetky vaše príspevky, údaje v profile tak skoro, ako je to v ľudských silách možné. Vaše komentáre budú kade-tade, ale budú priradené vašej adrese na Diaspore."
+        what_we_delete: "Zmažeme všetky vaše príspevky, údaje v profile tak skoro, ako je to v ľudských silách možné. Vaše komentáre budú kade-tade, ale budú priradené vášmu ID adrese na Diasporu."
       close_account_text: "Zrušiť účet"
       comment_on_post: "...niekto okomentuje váš príspevok?"
       current_password: "Súčasné heslo"
@@ -897,6 +904,7 @@ sk:
       edit_account: "Upraviť účet"
       email_awaiting_confirmation: "Poslali sme vám odkaz na aktiváciu %{unconfirmed_email}. Kým nekliknete na tento odkaz  a neaktivujete si novú adresu, budeme stále používať vašu pôvodnú adresu %{email}."
       export_data: "Exportovať dáta"
+      following: "Nastavenia sledovania"
       getting_started: "Nové nastavenia používateľa"
       liked: "...sa niekomu páči váš príspevok?"
       mentioned: "...vás spomenuli v príspevku?"
@@ -910,7 +918,7 @@ sk:
       started_sharing: "...sa niekto s vami o niečo podelí?"
       stream_preferences: "Nastavenia nástenky"
       your_email: "Váš e-mail"
-      your_handle: "Vaše id na Diasporu"
+      your_handle: "Vaše ID na Diasporu"
     getting_started:
       awesome_take_me_to_diaspora: "Super! Prejsť na Diasporu*"
       community_welcome: "Komunita Diaspory je šťastná, že ste na jej palube!"
@@ -937,6 +945,8 @@ sk:
       does_not_exist: "Používateľ %{username} neexistuje!"
     update:
       email_notifications_changed: "Nastavenia oznamov e-mailom sa zmenili"
+      follow_settings_changed: "Nastavenia sledovania sa zmenili"
+      follow_settings_not_changed: "Nastavenia sledovania sa nepodarilo zmeniť."
       language_changed: "Jazyk sa zmenil"
       language_not_changed: "Nepodarilo sa zmeniť jazyk"
       password_changed: "Heslo sa zmenilo. Teraz sa môžete prihlásiť so svojím novým heslom."

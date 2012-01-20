@@ -537,6 +537,13 @@ en_1337:
       destroy: D3L373
       not_found: "50RRY, W3 C0ULDN7 F1ND 7H47 5P4M!"
       permalink: P3RM4L1NK
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
   previous: PR3V10U5
   profile: PR0F1L3
   profiles:
@@ -781,10 +788,13 @@ en_1337:
       email_not_confirmed: "M41L C0ULD N07 B3 4C71V473D, WR0NG L1NK?"
     edit:
       also_commented: "...50M30N3 4L50 5P4M5 0N 4 N00B5 5P4M?"
+      auto_follow_back: "Automatically follow back if a someone follows you"
       change: CH4NG3
       change_email: "CH4NG3 M41L"
       change_language: "CH4NG3 L4NGU4G3"
       change_password: "CH4NG3 *****"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
       comment_on_post: "...50M30N3 5P4M5 Y0UR 5P4M?"
       current_password: "CURR3N7 *****"
       download_photos: "D0WNL04D MY PR0N"

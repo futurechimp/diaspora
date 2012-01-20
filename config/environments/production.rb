@@ -37,6 +37,7 @@ Diaspora::Application.configure do
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false
 
+
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
@@ -52,3 +53,4 @@ end
 # Sacrifice readability for a 10% performance boost
 Haml::Template::options[:ugly] = true
 GC.enable_stats if GC.respond_to?(:enable_stats)
+GC::Profiler.enable if defined?(GC::Profiler) && GC::Profiler.respond_to?(:enable)

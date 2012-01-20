@@ -1,13 +1,18 @@
 # Copyright (c) 2010-2011, Diaspora Inc.  This file is
 # licensed under the Affero General Public License version 3 or later.  See
 # the COPYRIGHT file.
+
 require 'uri'
+require File.join(Rails.root, 'lib', 'enviroment_configuration')
 
 class AppConfig < Settingslogic
-
   def self.source_file_name
+    if ENV['application_yml'].present?
+      puts "using remote application.yml"
+      return ENV['application_yml']
+    end
     config_file = File.join(Rails.root, "config", "application.yml")
-    if !File.exists?(config_file) && (Rails.env == 'test' || Rails.env.include?("integration") || ENV["HEROKU"])
+    if !File.exists?(config_file) && (Rails.env == 'test' || Rails.env.include?("integration") || EnviromentConfiguration.heroku?)
       config_file = File.join(Rails.root, "config", "application.yml.example")
     end
     config_file
@@ -16,7 +21,7 @@ class AppConfig < Settingslogic
   namespace Rails.env
 
   def self.load!
-    unless ENV["HEROKU"]
+    unless EnviromentConfiguration.heroku?
       if no_config_file? && !have_old_config_file?
         $stderr.puts <<-HELP
 ******** You haven't set up your Diaspora settings file. **********
@@ -52,7 +57,7 @@ Please do the following:
       Process.exit(1)
     end
 
-    if !ENV["HEROKU"] && no_cert_file_in_prod?
+    if !EnviromentConfiguration.heroku? && no_cert_file_in_prod?
       $stderr.puts <<-HELP
 ******** Diaspora does not know where your SSL-CA-Certificates file is. **********
   Please add the root certificate bundle (this is operating system specific) to application.yml. Defaults:
@@ -65,7 +70,9 @@ Please do the following:
 HELP
       Process.exit(1)
     end
+  end
 
+  def self.setup!
     normalize_pod_url
     normalize_admins
     normalize_pod_services
@@ -80,7 +87,7 @@ HELP
   end
 
   def self.no_cert_file_in_prod?
-    (Rails.env == "production") && self[:ca_file] && !File.exists?(self[:ca_file])
+    (Rails.env == "production") && (self[:ca_file].blank? || !File.exists?(self[:ca_file]))
   end
 
   def self.have_old_config_file?
@@ -96,20 +103,23 @@ HELP
     end
   end
 
+  def self.bare_pod_uri
+    self[:pod_uri].authority.gsub('www.', '')
+  end
+
   def self.normalize_admins
     self[:admins] ||= []
     self[:admins].collect! { |username| username.downcase }
   end
 
   def self.normalize_pod_services
+    self['configured_services'] = []
     if defined?(SERVICES)
-      configured_services = []
       SERVICES.keys.each do |service|
         unless SERVICES[service].keys.any?{|service_key| SERVICES[service][service_key].blank?}
-          configured_services << service
+          self['configured_services'] << service
         end
       end
-      self['configured_services'] = configured_services
     end
   end
 
@@ -117,7 +127,6 @@ HELP
 
   def self.[] (key)
     return self.pod_uri if key == :pod_uri
-    return ENV[key.to_s] if ENV[key.to_s] && ENV["HEROKU"]
     super
   end
 

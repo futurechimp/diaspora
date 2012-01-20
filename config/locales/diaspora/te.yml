@@ -13,9 +13,13 @@ te:
   _services: సేవలు
   account: ఖాతా
   ago: "%{time} క్రితం"
+  all_aspects: "అన్ని కోణాలు"
   application:
     helper:
+      diaspora_alpha: "డయాస్పోరా* ఆల్ఫా"
       unknown_person: "తెలియని వ్యక్తి"
+      video_title:
+        unknown: "తెలియని వీడియో శీర్షిక"
   aspects:
     edit:
       done: పూర్తయ్యింది
@@ -24,6 +28,7 @@ te:
     index:
       cubbies:
         learn_more: "మరింత తెలుసుకోండి"
+      handle_explanation: "This is your diaspora id. Like an email address, you can give this to people to reach you."
       help:
         need_help: "సహాయం కావాలా?"
       new_here:
@@ -39,6 +44,8 @@ te:
       work: సహోద్యోగులు
     two: "%{count} aspects"
     zero: "no aspects"
+  bookmarklet:
+    explanation_link_text: "ఈ లంకె"
   cancel: రద్దుచేయి
   comments:
     few: "%{count} వ్యాఖ్యలు"
@@ -49,6 +56,8 @@ te:
     zero: "వ్యాఖ్యలు లేవు"
   contacts:
     few: "%{count} పరిచయాలు"
+    index:
+      your_contacts: "మీ పరిచయాలు"
     many: "%{count} contacts"
     one: "1 contact"
     other: "%{count} contacts"
@@ -225,9 +234,23 @@ te:
     zero: "no people"
   posts:
     show:
+      destroy: తొలగించు
       permalink: స్థిరలంకె
+      photos_by:
+        few: "%{count} photos by %{author}"
+        many: "%{count} photos by %{author}"
+        one: "One photo by %{author}"
+        other: "%{count} photos by %{author}"
+        two: "Two photos by %{author}"
+        zero: "No photos by %{author}"
+  privacy: అంతరంగికత
+  privacy_policy: "అంతరంగికత విధానం"
   profiles:
     edit:
+      first_name: "మొదటి పేరు"
+      your_birthday: "మీ పుట్టినరోజు"
+      your_gender: "మీ లింగం"
+      your_location: "మీ ప్రాంతం"
       your_name: "మీ పేరు"
       your_photo: "మీ ఫొటో"
   public: బహిరంగం
@@ -238,6 +261,9 @@ te:
     other: "%{count} reactions"
     two: "%{count} reactions"
     zero: "0 reactions"
+  registrations:
+    edit:
+      cancel_my_account: "నా ఖాతాను రద్దుచేయి"
   requests:
     helper:
       new_requests:
@@ -252,12 +278,15 @@ te:
       reshare:
         few: "%{count} reshares"
         many: "%{count} reshares"
-        one: "1 reshare"
-        other: "%{count} reshares"
-        two: "%{count} reshares"
+        one: "1 పంచుకోలు"
+        other: "%{count} పంచుకోళ్ళు"
+        two: "%{count} పంచుకోళ్ళు"
         zero: Reshare
+  search: వెతుకు
   settings: అమరికలు
   shared:
+    add_contact:
+      your_diaspora_username_is: "మీ డయస్పోరా వాడుకరి పేరు: %{diaspora_handle}"
     aspect_dropdown:
       toggle:
         few: "In %{count} aspects"
@@ -266,6 +295,8 @@ te:
         other: "In %{count} aspects"
         two: "In %{count} aspects"
         zero: "Add contact"
+    stream_element:
+      show: చూపించు
   status_messages:
     too_long:
       few: "please make your status messages less than %{count} characters"
@@ -282,4 +313,29 @@ te:
       other: "Show %{count} more comments"
       two: "Show two more comments"
       zero: "No more comments"
+  terms_and_conditions: "నియమాలు మరియు నిబంధనలు"
+  users:
+    edit:
+      change: మార్చు
+      change_language: "భాష మార్పు"
+      change_password: "సంకేతపదం మార్పు"
+      close_account:
+        what_we_delete: "We delete all of your posts, profile data, as soon as humanly possible. Your comments will hang around, but be associated with your Diaspora Handle."
+      close_account_text: "ఖాతా మూసివేత"
+      current_password: "ప్రస్తుత సంకేతపదం"
+      new_password: "కొత్త సంకేతపదం"
+      your_email: "మీ ఈమెయిలు"
+      your_handle: "మీ డయస్పోరా గుర్తింపు"
+    privacy_settings:
+      title: "అంతరంగికత అమరికలు"
+    public:
+      does_not_exist: "%{username} అనే వాడుకరి లేనే లేరు!"
+    update:
+      language_changed: "భాషను మార్చాం"
+      language_not_changed: "భాష మార్పు విఫలమైంది"
+      password_changed: "సంకేతపదాన్ని మార్చాం.  మీరు ఇప్పుడు మీ కొత్త సంకేతపదంలో ప్రవేశించవచ్చు."
+      password_not_changed: "సంకేతపదం మార్పు విఫలమైంది"
   welcome: స్వాగతం!
+  will_paginate:
+    next_label: "తదుపరి &raquo;"
+    previous_label: "&laquo; గత"

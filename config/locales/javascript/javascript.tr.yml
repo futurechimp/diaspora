@@ -9,6 +9,7 @@ tr:
     aspect_dropdown:
       add_to_aspect: "Yönüne ekle"
       all_aspects: "Tüm yönler"
+      error: "{{name}} ile paylaşım başlatılamadı. Onu yasaklamış olmayasınız?"
       select_aspects: "Yönleri seç"
       started_sharing_with: "{{name}} sizinle paylaşıma başladı!"
       stopped_sharing_with: "{{name}} sizinle paylaşımı durdurdu."
@@ -33,7 +34,7 @@ tr:
       alright_ill_wait: "Tamam, ben bekleyeceğim."
       hey: "Merhaba, {{name}}!"
       no_tags: "Hey, hiç etiket takip etmiyorsunuz! Gerçekten devam etmek istiyor musun?"
-      preparing_your_stream: "Kişiselleştirilmiş akışınız hazırlanıyor ..."
+      preparing_your_stream: "Kişiselleştirilmiş akışınız hazırlanıyor..."
     infinite_scroll:
       no_more: "Daha fazla gönderi yok."
     photo_uploader:
@@ -46,6 +47,28 @@ tr:
       duplicate: "Bu iyi, değil mi? Zaten bu gönderiyi tekrar paylaştın!"
     search_for: "{{name}} Ara"
     show_more: "daha fazlasını göster"
+    stream:
+      likes:
+        few: "<%= count %> Likes"
+        many: "<%= count %> Likes"
+        one: "<%= count %> Like"
+        other: "<%= count %> Likes"
+        two: "<%= count %> Likes"
+        zero: "<%= count %> Likes"
+      more_comments:
+        few: "Show <%= count %> more comments"
+        many: "Show <%= count %> more comments"
+        one: "Show <%= count %> more comment"
+        other: "Show <%= count %> more comments"
+        two: "Show <%= count %> more comments"
+        zero: "Show <%= count %> more comments"
+      reshares:
+        few: "<%= count %> Reshares"
+        many: "<%= count %> Reshares"
+        one: "<%= count %> Reshare"
+        other: "<%= count %> Reshares"
+        two: "<%= count %> Reshares"
+        zero: "<%= count %> Reshares"
     tags:
       wasnt_that_interesting: "Tamam, benim #{{tagName}} o kadar da ilginç değil..."
     timeago:
@@ -67,5 +90,3 @@ tr:
     videos:
       unknown: "Bilinmeyen video tipi"
       watch: "Bu videoyu {{provider}}'da izle"
-    web_sockets:
-      disconnected: "Websocket kapalı; gönderiler bundan sonra canlı akış olacak."

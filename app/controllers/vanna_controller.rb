@@ -28,7 +28,6 @@ class VannaController < Vanna::Base
   before_filter :set_git_header if (AppConfig[:git_update] && AppConfig[:git_revision])
   before_filter :which_action_and_user
   before_filter :all_aspects
-  prepend_before_filter :clear_gc_stats
   before_filter :set_grammatical_gender
 
   def ensure_http_referer_is_set
@@ -82,13 +81,9 @@ class VannaController < Vanna::Base
     WillPaginate::ViewHelpers.pagination_options[:next_label] = "#{I18n.t('next')} &raquo;"
   end
 
-  def clear_gc_stats
-    GC.clear_stats if GC.respond_to?(:clear_stats)
-  end
-
   def redirect_unless_admin
     unless current_user.admin?
-      redirect_to multi_path, :notice => 'you need to be an admin to do that'
+      redirect_to multi_stream_path, :notice => 'you need to be an admin to do that'
       return
     end
   end
