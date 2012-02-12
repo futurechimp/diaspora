@@ -111,7 +111,6 @@ ml:
         have_a_question: "... have a %{link}?"
         here_to_help: "The Diaspora community is here!"
         need_help: "Need Help?"
-        satisfaction: "%{link}: Community-powered support"
         tag_bug: "bug"
         tag_feature: "feature"
         tag_question: "question"
@@ -202,11 +201,14 @@ ml:
     index:
       add_a_new_aspect: "Add a new aspect"
       add_to_aspect: "add contacts to %{name}"
+      add_to_aspect_link: "add contacts to %{name}"
       all_contacts: "All Contacts"
-      check_out: "Check out"
+      community_spotlight: "Community Spotlight"
       many_people_are_you_sure: "Are you sure you want to start a private conversation with more than %{suggested_limit} contacts? Posting to this aspect may be a better way to contact them."
       my_contacts: "My Contacts"
       no_contacts: "No contacts."
+      no_contacts_message: "Check out %{community_spotlight}"
+      no_contacts_message_with_aspect: "Check out %{community_spotlight} or %{add_to_aspect_link}"
       only_sharing_with_me: "Only sharing with me"
       remove_person_from_aspect: "Remove %{person_name} from \"%{aspect_name}\""
       start_a_conversation: "Start a conversation"
@@ -310,6 +312,7 @@ ml:
       to: സ്വീകര്‍ത്താവ്
   layouts:
     application:
+      back_to_top: "Back to top"
       powered_by: "ഡയസ്പോറയാല്‍* ശക്തമാക്കിയത്"
       public_feed: "%{name} -ന്റെ പൊതു ഡയസ്പോറ ഫീഡ്"
       toggle: "മൊബൈല്‍ സൈറ്റിലേക്ക് മാറുക"
@@ -744,6 +747,7 @@ ml:
     notification:
       new: "പുതിയ %{type} %{from} ല്‍ നിന്ന്"
     public_explain:
+      atom_feed: "Atom feed"
       control_your_audience: "Control your Audience"
       logged_in: "%{service} ലേയ്ക്ക് പ്രവേശിച്ചിരിക്കുന്നു."
       manage: "ബന്ധിപ്പിച്ചിരിക്കുന്ന സേവനങ്ങളെ കൈകാര്യം ചെയ്യുക"

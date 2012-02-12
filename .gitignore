@@ -19,6 +19,7 @@ vendor/bundle/*
 vendor/cache/*
 config/database.yml
 .rvmrc_custom
+.rvmrc.local
 
 #Mailing list stuff
 config/email_offset
@@ -41,6 +42,7 @@ doc/
 public/uploads/*
 public/assets/*
 public/source.tar*
+public/.well-known
 tmp/**/*
 tmp/*
 *.sqlite3

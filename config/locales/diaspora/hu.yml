@@ -110,7 +110,6 @@ hu:
         have_a_question: "... kérdésed van? %{link}"
         here_to_help: "A Diaspora közösség megérkezett!"
         need_help: "Segítségre van szüksége?"
-        satisfaction: "%{link}: Közösségi támogatás"
         tag_feature: funkció
         tag_question: kérdés
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Közösségi leckék, módszerek, hírek"
@@ -201,7 +200,6 @@ hu:
       add_a_new_aspect: "Új csoport"
       add_to_aspect: "Kapcsolatok hozzáadása %{name}"
       all_contacts: "Összes ismerős"
-      check_out: "Nézd meg"
       many_people_are_you_sure: "Biztos, hogy privát beszélgetést akarsz kezdeményezni több mint %{suggested_limit} személlyel? Talán jobb lenne, ha bejegyzést írnál ennek a csoportnak."
       my_contacts: Kapcsolataim
       no_contacts: "Nincs ismerősöd."

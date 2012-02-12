@@ -2,11 +2,19 @@ app.models.Post = Backbone.Model.extend({
   urlRoot : "/posts",
   initialize : function() {
     this.comments = new app.collections.Comments(this.get("last_three_comments"), {post : this});
-    this.likes = new app.collections.Likes(this.get("user_like"), { post : this}); // load in the user like initially
+    this.likes = new app.collections.Likes([], {post : this}); // load in the user like initially
   },
 
   createdAt : function() {
-    return new Date(this.get("created_at")) / 1000;
+    return this.timeOf("created_at");
+  },
+
+  interactedAt : function() {
+    return this.timeOf("interacted_at");
+  },
+
+  timeOf: function(field) {
+    return new Date(this.get(field)) /1000;
   },
 
   createReshareUrl : "/reshares",

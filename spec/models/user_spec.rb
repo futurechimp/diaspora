@@ -5,7 +5,6 @@
 require 'spec_helper'
 
 describe User do
-
   describe "private key" do
     it 'has a key' do
       alice.encryption_key.should_not be nil
@@ -131,7 +130,7 @@ describe User do
   describe 'overwriting people' do
     it 'does not overwrite old users with factory' do
       lambda {
-        new_user = Factory.create(:user, :id => alice.id)
+        new_user = Factory(:user, :id => alice.id)
       }.should raise_error ActiveRecord::StatementInvalid
     end
 
@@ -298,14 +297,6 @@ describe User do
     end
   end
 
-  describe '#seed_aspects' do
-    it 'follows the default account' do
-      Webfinger.stub_chain(:new, :fetch).and_return(Factory(:person))
-      expect{
-       eve.seed_aspects
-      }.to change(eve.contacts, :count).by(1)
-    end
-  end
 
   describe ".build" do
     context 'with valid params' do
@@ -367,7 +358,7 @@ describe User do
     end
 
     describe "with malicious params" do
-      let(:person) {Factory.create :person}
+      let(:person) {Factory :person}
       before do
         @invalid_params = {:username => "ohai",
                   :email => "ohai@example.com",
@@ -580,18 +571,16 @@ describe User do
   end
 
   describe '#update_post' do
-    it 'sends a notification to aspects' do
-      m = mock()
-      m.should_receive(:post)
-      Postzord::Dispatcher.should_receive(:build).and_return(m)
+    it 'should dispatch post' do
       photo = alice.build_post(:photo, :user_file => uploaded_photo, :text => "hello", :to => alice.aspects.first.id)
+      alice.should_receive(:dispatch_post).with(photo)
       alice.update_post(photo, :text => 'hellp')
     end
   end
 
   describe '#notify_if_mentioned' do
     before do
-      @post = Factory.create(:status_message, :author => bob.person)
+      @post = Factory(:status_message, :author => bob.person)
     end
 
     it 'notifies the user if the incoming post mentions them' do
@@ -609,7 +598,7 @@ describe User do
     end
 
     it 'does not notify the user if the post author is not a contact' do
-      @post = Factory.create(:status_message, :author => eve.person)
+      @post = Factory(:status_message, :author => eve.person)
       @post.stub(:mentions?).and_return(true)
       @post.should_not_receive(:notify_person)
 
@@ -691,11 +680,11 @@ describe User do
   context 'likes' do
     before do
       alices_aspect = alice.aspects.where(:name => "generic").first
-      bobs_aspect = bob.aspects.where(:name => "generic").first
+      @bobs_aspect = bob.aspects.where(:name => "generic").first
       @message = alice.post(:status_message, :text => "cool", :to => alices_aspect)
-      @message2 = bob.post(:status_message, :text => "uncool", :to => bobs_aspect)
-      @like = alice.like(true, :target => @message)
-      @like2 = bob.like(true, :target => @message)
+      @message2 = bob.post(:status_message, :text => "uncool", :to => @bobs_aspect)
+      @like = alice.like!(@message)
+      @like2 = bob.like!(@message)
     end
 
     describe '#like_for' do
@@ -856,7 +845,7 @@ describe User do
   describe "#accept_invitation!" do
     before do
       fantasy_resque do
-        @invitation = Factory.create(:invitation, :sender => eve, :identifier => 'invitee@example.org', :aspect => eve.aspects.first)
+        @invitation = Factory(:invitation, :sender => eve, :identifier => 'invitee@example.org', :aspect => eve.aspects.first)
       end
 
       @invitation.reload
@@ -1003,7 +992,7 @@ describe User do
 
     describe "#clearable_attributes" do
       it 'returns the clearable fields' do
-        user = Factory.create :user
+        user = Factory :user
         user.send(:clearable_fields).sort.should == %w{
           language
           invitation_token

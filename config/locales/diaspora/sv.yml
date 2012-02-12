@@ -111,7 +111,6 @@ sv:
         have_a_question: "... en %{link}?"
         here_to_help: "Diaspora-communityn finns här!"
         need_help: "Behöver du hjälp?"
-        satisfaction: "%{link}: Support ifrån communityn"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Handledning, guider och nyheter från gemenskapen"
       introduce_yourself: "Det här är din ström. Hoppa in och presentera dig själv."
       keep_us_running: "Håll farten hos %{pod} uppe och köp kaffe till servrarna genom en månadsdonation!"
@@ -199,7 +198,6 @@ sv:
       add_a_new_aspect: "Lägg till en ny aspekt"
       add_to_aspect: "lägg till kontakter i %{name}"
       all_contacts: "Alla kontakter"
-      check_out: "Checka ut"
       many_people_are_you_sure: "Är du säker på att du vill starta en privat konversation mer mer än %{suggested_limit} kontakter? Ett bättre sätt kan vara att posta inlägget i denna aspekt."
       my_contacts: "Mina kontakter"
       no_contacts: "Det verkar som om att du skulle behöva några fler kontakter!"
@@ -301,6 +299,7 @@ sv:
       to: Till
   layouts:
     application:
+      back_to_top: "Åter till början"
       public_feed: "Offentligt Diasporaflöde för %{name}"
       toggle: "byt till mobilanpassad "
       whats_new: "några nyheter?"

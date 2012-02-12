@@ -1,6 +1,6 @@
 app.views.Header = app.views.Base.extend({
-
-  template_name : "#header-template",
+  
+  templateName : "header",
 
   tagName : "header",
 

@@ -1,6 +1,6 @@
 app.views.Post = app.views.StreamObject.extend({
-
-  template_name: "#stream-element-template",
+  
+  templateName: "stream-element",
 
   className : "stream_element loaded",
 
@@ -28,13 +28,16 @@ app.views.Post = app.views.StreamObject.extend({
 
     //subviews
     this.commentStreamView = new app.views.CommentStream({ model : this.model});
-    this.likesInfoView = new app.views.LikesInfo({ model : this.model});
 
     return this;
   },
 
+  likesInfoView : function(){
+    return new app.views.LikesInfo({ model : this.model});
+  },
+
   feedbackView : function(){
-    if(!window.app.user().current_user ) { return null }
+    if(!window.app.user()) { return null }
     return new  app.views.Feedback({model : this.model});
   },
 
@@ -42,6 +45,12 @@ app.views.Post = app.views.StreamObject.extend({
     var normalizedClass = this.model.get("post_type").replace(/::/, "__");
     var postClass = app.views[normalizedClass] || app.views.StatusMessage;
     return new postClass({ model : this.model });
+  },
+
+  presenter : function() {
+    return _.extend(this.defaultPresenter(), {
+      authorIsCurrentUser : this.authorIsCurrentUser()
+    })
   },
 
   removeNsfwShield: function(evt){
@@ -93,5 +102,9 @@ app.views.Post = app.views.StreamObject.extend({
     this.$(".comment_box").focus();
 
     return this;
+  },
+
+  authorIsCurrentUser : function() {
+    return this.model.get("author").id != (!!app.user() && app.user().id)
   }
 });

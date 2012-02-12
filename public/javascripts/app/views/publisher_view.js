@@ -1,8 +1,9 @@
 //this file is the scary no-no-zone bad-touch of our backbone code.
 //after re-writing/eliminating the existing Publisher let's re-write
-//this with PANACHE!
+//this with PANACHE!    <333 Dennis
 
 app.views.Publisher = Backbone.View.extend({
+  
   el : "#publisher",
 
   events : {
@@ -54,8 +55,7 @@ app.views.Publisher = Backbone.View.extend({
     // close publishing area (CSS)
     this.close();
 
-    // clear mentions (TO BE REMOVED!!)
-    Publisher.autocompletion.mentionList.clear()
+    Publisher.clear()
 
     return this;
   },

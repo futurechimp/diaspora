@@ -111,7 +111,6 @@ fi:
         have_a_question: "... kysyä kysymyksen? %{link}"
         here_to_help: "Diaspora-yhteisö auttaa!"
         need_help: "Tarvitsetko apua?"
-        satisfaction: "%{link}: Yhteisön tarjoama tuki"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Yhteisön laatimia oppaita, ohjeita ja uutisia"
       introduce_yourself: "Tämä on virtasi. Hyppää sekaan ja esittele itsesi."
       keep_us_running: "Pidä %{pod} vauhdissa tarjoamalla palvelimille kupponen kahvia kuukausittaisella lahjoituksella!"
@@ -200,7 +199,6 @@ fi:
       add_a_new_aspect: "Lisää näkymä"
       add_to_aspect: "lisää kontakteja näkymään %{name}"
       all_contacts: "Kaikki kontaktit"
-      check_out: Katso
       many_people_are_you_sure: "Oletko varma, että haluat aloittaa yksityiskeskustelun useamman kuin %{suggested_limit} kontaktin kanssa? Viestin lähettäminen tähän näkymään voisi olla parempi tapa olla yhteydessä heihin."
       my_contacts: Kontaktini
       no_contacts: "Sinun pitäisi näköjään lisätä kontakteja!"

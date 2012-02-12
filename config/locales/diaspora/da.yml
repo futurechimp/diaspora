@@ -110,7 +110,6 @@ da:
         have_a_question: "... har du et %{link}?"
         here_to_help: "Diaspora samfundet er her!"
         need_help: "Brug for hjælp?"
-        satisfaction: "%{link}: Samfunds-drevet support"
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Samfundsdrevne selvinstruktioner, vejledninger og nyheder"
       introduce_yourself: "Dette er din strøm. Hop ud i det og introducér dig selv."
       keep_us_running: "Hold %{pod} kørende hurtigt og køb serverne deres kaffe fix med en månedlig donation!"
@@ -197,8 +196,8 @@ da:
     index:
       add_a_new_aspect: "Tilføj nyt aspekt"
       add_to_aspect: "Tilføj kontaktpersoner til %{name}"
+      add_to_aspect_link: "tilføj kontakter til %{name}"
       all_contacts: "Alle kontakter"
-      check_out: Tjek
       many_people_are_you_sure: "Er du sikker på du vil starte en privat samtale med mere end %{suggested_limit} kontakter? Et indlæg til dette aspekt kan være en bedre måde at kontakte dem."
       my_contacts: "Mine kontakter"
       no_contacts: "Det ser ud til at du bliver nødt til at tilføje nogle kontakter!"
@@ -303,6 +302,7 @@ da:
       to: Til
   layouts:
     application:
+      back_to_top: "Tilbage til toppen"
       public_feed: "Offentligt Diaspora nyheds feed for  %{name}"
       toggle: "skift mobil side"
       whats_new: "Hvad er nyt?"
@@ -572,6 +572,7 @@ da:
         other: "%{count} billeder af %{author}"
         two: "To billeder af %{author}"
         zero: "Ingen billeder af %{author}"
+      reshare_by: "Videredelt af %{author}"
   previous: Forrige
   privacy: Privatindstillinger
   privacy_policy: "Behandling af personlige oplysninger"

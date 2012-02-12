@@ -111,7 +111,6 @@ pt-PT:
         have_a_question: "... uma %{link}?"
         here_to_help: "A comunidade do Diaspora está aqui!"
         need_help: "Precisa de ajuda?"
-        satisfaction: "%{link}: Apoio da comunidade"
         tag_feature: funcionalidade
         tag_question: questão
         tutorials_wiki_and_forum: "%{tutorial} & %{wiki} & %{forum}: Tutoriais, Como Fazer e Notícias desenvolvidos pela comunidade"
@@ -200,7 +199,6 @@ pt-PT:
       add_a_new_aspect: "Adicionar um novo aspecto"
       add_to_aspect: "Adicionar contactos a %{name}"
       all_contacts: "Todos os Contactos"
-      check_out: Veja
       many_people_are_you_sure: "Tem a certeza de que deseja começar um conversa privada com mais de %{suggested_limit} contactos? Publicar para este aspecto pode ser uma forma melhor de os contactar."
       my_contacts: "Os Meus Contactos"
       no_contacts: "Parece que precisa de adicionar alguns contactos."

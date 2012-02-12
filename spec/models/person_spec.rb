@@ -8,7 +8,7 @@ describe Person do
 
   before do
     @user = bob
-    @person = Factory.create(:person)
+    @person = Factory(:person)
   end
 
   it 'always has a profile' do
@@ -53,24 +53,24 @@ describe Person do
       end
     end
 
-    describe '.find_person_from_id_or_username' do
+    describe '.find_person_from_guid_or_username' do
       it 'searchs for a person if id is passed' do
-        Person.find_from_id_or_username(:id => @person.id).id.should == @person.id
+        Person.find_from_guid_or_username(:id => @person.guid).id.should == @person.id
       end
 
       it 'searchs a person from a user if username is passed' do
-        Person.find_from_id_or_username(:username => @user.username).id.should == @user.person.id
+        Person.find_from_guid_or_username(:username => @user.username).id.should == @user.person.id
       end
 
       it 'throws active record not found exceptions if no person is found via id' do
         expect{
-          Person.find_from_id_or_username(:id => 213123)
+          Person.find_from_guid_or_username(:id => "2d13123")
         }.to raise_error ActiveRecord::RecordNotFound
       end
 
       it 'throws active record not found exceptions if no person is found via username' do
         expect{
-          Person.find_from_id_or_username(:username => 'michael_jackson')
+          Person.find_from_guid_or_username(:username => 'michael_jackson')
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end
@@ -94,8 +94,8 @@ describe Person do
 
     describe ".who_have_reshared a user's posts" do
       it 'pulls back users who reshared the status message of a user' do
-        sm = Factory.create(:status_message, :author => alice.person, :public => true)
-        reshare = Factory.create(:reshare, :root => sm)
+        sm = Factory(:status_message, :author => alice.person, :public => true)
+        reshare = Factory(:reshare, :root => sm)
         Person.who_have_reshared_a_users_posts(alice).should == [reshare.author]
       end
     end
@@ -111,17 +111,17 @@ describe Person do
 
   describe "vaild url" do
     it 'should allow for https urls' do
-      person = Factory.create(:person, :url => "https://example.com")
+      person = Factory(:person, :url => "https://example.com")
       person.should be_valid
     end
 
     it 'should always return the correct receive url' do
-      person = Factory.create(:person, :url => "https://example.com/a/bit/messed/up")
+      person = Factory(:person, :url => "https://example.com/a/bit/messed/up")
       person.receive_url.should == "https://example.com/receive/users/#{person.guid}/"
     end
 
     it 'should allow ports in the url' do
-      person = Factory.create(:person, :url => "https://example.com:3000/")
+      person = Factory(:person, :url => "https://example.com:3000/")
       person.url.should == "https://example.com:3000/"
     end
   end
@@ -223,8 +223,8 @@ describe Person do
   end
 
   it '#owns? posts' do
-    person_message = Factory.create(:status_message, :author => @person)
-    person_two = Factory.create(:person)
+    person_message = Factory(:status_message, :author => @person)
+    person_two = Factory(:person)
 
     @person.owns?(person_message).should be true
     person_two.owns?(person_message).should be false
@@ -270,16 +270,16 @@ describe Person do
   describe '.search' do
     before do
       Person.delete_all
-      @user = Factory.create(:user_with_aspect)
+      @user = Factory(:user_with_aspect)
       user_profile = @user.person.profile
       user_profile.first_name = "aiofj"
       user_profile.last_name = "asdji"
       user_profile.save
 
-      @robert_grimm = Factory.create(:searchable_person)
-      @eugene_weinstein = Factory.create(:searchable_person)
-      @yevgeniy_dodis = Factory.create(:searchable_person)
-      @casey_grippi = Factory.create(:searchable_person)
+      @robert_grimm = Factory(:searchable_person)
+      @eugene_weinstein = Factory(:searchable_person)
+      @yevgeniy_dodis = Factory(:searchable_person)
+      @casey_grippi = Factory(:searchable_person)
 
       @robert_grimm.profile.first_name = "Robert"
       @robert_grimm.profile.last_name = "Grimm"
@@ -463,10 +463,11 @@ describe Person do
     it 'returns a hash representation of a person' do
       @person.as_json.should == {
         :id => @person.id,
+        :guid => @person.guid,
         :name => @person.name,
         :avatar => @person.profile.image_url(:thumb_medium),
         :handle => @person.diaspora_handle,
-        :url => "/people/#{@person.id}",
+        :url => Rails.application.routes.url_helpers.person_path(@person),
       }
     end
     it 'return tags if asked' do

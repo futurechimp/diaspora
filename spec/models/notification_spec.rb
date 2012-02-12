@@ -28,7 +28,7 @@ describe Notification do
 
   describe '.for' do
     it 'returns all of a users notifications' do
-      user2 = Factory.create(:user)
+      user2 = Factory(:user)
       4.times do
         Notification.create(@opts)
       end
@@ -39,6 +39,21 @@ describe Notification do
       Notification.for(@user).count.should == 4
     end
   end
+
+  describe 'set_read_state method' do
+    it "should set an unread notification to read" do
+      @note.unread = true
+      @note.set_read_state( true )
+      @note.unread.should == false
+    end
+    it "should set an read notification to unread" do
+      @note.unread = false
+      @note.set_read_state( false )
+      @note.unread.should == true
+    end
+
+  end
+
 
   describe '.concatenate_or_create' do
     it 'creates a new notificiation if the notification does not exist, or if it is unread' do
@@ -98,8 +113,8 @@ describe Notification do
         before do
           @user3 = bob
           @sm = @user3.post(:status_message, :text => "comment!", :to => :all)
-          Postzord::Receiver::Private.new(@user3, :person => @user2.person, :object => @user2.comment("hey", :post => @sm)).receive_object
-          Postzord::Receiver::Private.new(@user3, :person => @user.person, :object => @user.comment("hey", :post => @sm)).receive_object
+          Postzord::Receiver::Private.new(@user3, :person => @user2.person, :object => @user2.comment!(@sm, "hey")).receive_object
+          Postzord::Receiver::Private.new(@user3, :person => @user.person, :object => @user.comment!(@sm, "hey")).receive_object
         end
 
         it "updates the notification with a more people if one already exists" do
@@ -107,7 +122,7 @@ describe Notification do
         end
 
         it 'handles double comments from the same person without raising' do
-          Postzord::Receiver::Private.new(@user3, :person => @user2.person, :object => @user2.comment("hey", :post => @sm)).receive_object
+          Postzord::Receiver::Private.new(@user3, :person => @user2.person, :object => @user2.comment!(@sm, "hey")).receive_object
           Notification.where(:recipient_id => @user3.id, :target_type => @sm.class.base_class, :target_id => @sm.id).first.actors.count.should == 2
         end
       end
