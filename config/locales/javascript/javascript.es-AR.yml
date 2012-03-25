@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -35,6 +35,8 @@ es-AR:
       hey: "Che, {{name}}!"
       no_tags: "¡Che, no estás siguiendo ningún tag! ¿Continuar de todos modos?"
       preparing_your_stream: "Preparando tu stream personalizado..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "No hay más publicaciones."
     photo_uploader:
@@ -80,7 +82,7 @@ es-AR:
       minutes: "%d minutos"
       month: "cerca de un mes"
       months: "%d meses"
-      prefixAgo: hace
+      prefixAgo: "hace"
       prefixFromNow: "dentro de"
       seconds: "menos de un minuto"
       suffixAgo: ""

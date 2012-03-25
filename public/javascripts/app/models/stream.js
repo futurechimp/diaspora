@@ -58,10 +58,10 @@ app.models.Stream = Backbone.Collection.extend({
   },
 
   sortOrder : function() {
-    return this.basePath().match(/participate/) ? "interactedAt" : "createdAt"
+    return this.basePath().match(/activity/) ? "interactedAt" : "createdAt"
   },
 
   add : function(models){
     this.posts.add(models)
   }
-})
+});

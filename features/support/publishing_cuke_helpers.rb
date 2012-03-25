@@ -17,6 +17,22 @@ module PublishingCukeHelpers
     ')
   end
 
+  def expand_first_post
+    find(".stream_element:first .expander").click
+    wait_until{ !find(".expander").visible? }
+  end
+
+  def first_post_collapsed?
+    find(".stream_element:first .collapsible").should have_css(".expander")
+    find(".stream_element:first .collapsible").has_selector?(".collapsed")
+  end
+
+  def first_post_expanded?
+    find(".stream_element:first .expander").should_not be_visible
+    find(".stream_element:first .collapsible").has_no_selector?(".collapsed")
+    find(".stream_element:first .collapsible").has_selector?(".opened")
+  end
+
   def first_post_text
     find('.stream_element:first .post-content').text()
   end
@@ -25,9 +41,9 @@ module PublishingCukeHelpers
     find(".stream_element:contains('#{text}')")
   end
 
-  def pin_post(post_text)
+  def like_post(post_text)
     within_post(post_text) do
-      click_link 'Pin'
+      click_link 'Like'
     end
     wait_for_ajax_to_finish
   end
@@ -65,7 +81,7 @@ module PublishingCukeHelpers
 
   def assert_nsfw(text)
     post = find_post_by_text(text)
-    post.find(".shield").should be_present
+    post.find(".nsfw-shield").should be_present
   end
 end
 

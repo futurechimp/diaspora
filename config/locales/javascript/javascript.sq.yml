@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -35,6 +35,8 @@ sq:
       hey: "Hej, {{name}}!"
       no_tags: "Hej, nuk jeni duke ndjekur ndonjë etiketë!  Të vazhdohet, sido qoftë?"
       preparing_your_stream: "Po përgatitet rrëkeja juaj e personalizuar..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Nuk ka më postime."
     photo_uploader:
@@ -80,6 +82,8 @@ sq:
       minutes: "%d minuta"
       month: "rreth një muaj"
       months: "%d muaj"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "më pak se një minutë"
       suffixAgo: "më parë"
       suffixFromNow: "nga tani"

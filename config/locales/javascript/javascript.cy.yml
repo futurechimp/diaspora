@@ -1,4 +1,4 @@
-#   Copyright (c) 2010-2011, Diaspora Inc.  This file is
+#   Copyright (c) 2010-2012, Diaspora Inc.  This file is
 #   licensed under the Affero General Public License version 3 or later.  See
 #   the COPYRIGHT file.
 
@@ -35,6 +35,8 @@ cy:
       hey: "Hei, {{name}}!"
       no_tags: "Hei, dydych chi ddim yn dilyn unrhyw tagiau! Dal ymlaen beth bynnag?"
       preparing_your_stream: "Preparing your personalised stream..."
+    header:
+      search: "Find people or #tags"
     infinite_scroll:
       no_more: "Dim mwy o swyddi."
     photo_uploader:
@@ -68,14 +70,16 @@ cy:
     tags:
       wasnt_that_interesting: "OK, mae'n debyg nid yw #{{tagName}} yn ddiddorol iawn..."
     timeago:
-      day: diwrnod
+      day: "diwrnod"
       days: "%d diwrnod"
-      hour: awr
+      hour: "awr"
       hours: "%d awr"
       minute: "tua funud"
       minutes: "%d munud"
-      month: mis
+      month: "mis"
       months: "%d mis"
+      prefixAgo: ""
+      prefixFromNow: ""
       seconds: "rhai na munud"
       suffixAgo: "yn ôl"
       suffixFromNow: "o hŷd"

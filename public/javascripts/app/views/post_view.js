@@ -1,12 +1,14 @@
 app.views.Post = app.views.StreamObject.extend({
-  
+
   templateName: "stream-element",
 
   className : "stream_element loaded",
 
   events: {
     "click .focus_comment_textarea": "focusCommentTextarea",
-    "click .shield a": "removeNsfwShield",
+    "click .show_nsfw_post": "removeNsfwShield",
+    "click .toggle_nsfw_state": "toggleNsfwState",
+
     "click .remove_post": "destroyModel",
     "click .hide_post": "hidePost",
     "click .block_user": "blockUser"
@@ -21,10 +23,12 @@ app.views.Post = app.views.StreamObject.extend({
 
   tooltipSelector : ".delete, .block_user, .post_scope",
 
-  initialize : function() {
-    $(this.el).attr("id", this.model.get("guid"));
+  initialize : function(options) {
+    // allow for a custom template name to be passed in via the options hash
+    this.templateName = options.templateName || this.templateName
 
     this.model.bind('remove', this.remove, this);
+    this.model.bind('destroy', this.destroy, this);
 
     //subviews
     this.commentStreamView = new app.views.CommentStream({ model : this.model});
@@ -37,8 +41,8 @@ app.views.Post = app.views.StreamObject.extend({
   },
 
   feedbackView : function(){
-    if(!window.app.user()) { return null }
-    return new  app.views.Feedback({model : this.model});
+    if(!app.currentUser.authenticated()) { return null }
+    return new app.views.Feedback({model : this.model});
   },
 
   postContentView: function(){
@@ -49,16 +53,25 @@ app.views.Post = app.views.StreamObject.extend({
 
   presenter : function() {
     return _.extend(this.defaultPresenter(), {
-      authorIsCurrentUser : this.authorIsCurrentUser()
+      authorIsNotCurrentUser : this.authorIsNotCurrentUser(),
+      showPost : this.showPost(),
+      text : app.helpers.textFormatter(this.model)
     })
+  },
+
+  showPost : function() {
+    return (app.currentUser.get("showNsfw")) || !this.model.get("nsfw")
   },
 
   removeNsfwShield: function(evt){
     if(evt){ evt.preventDefault(); }
+    this.model.set({nsfw : false})
+    this.render();
+  },
 
-    $(evt.target).parent(".shield").remove();
-
-    return this;
+  toggleNsfwState: function(evt){
+    if(evt){ evt.preventDefault(); }
+    app.currentUser.toggleNsfwState();
   },
 
   blockUser: function(evt){
@@ -104,7 +117,17 @@ app.views.Post = app.views.StreamObject.extend({
     return this;
   },
 
-  authorIsCurrentUser : function() {
-    return this.model.get("author").id != (!!app.user() && app.user().id)
+  authorIsNotCurrentUser : function() {
+    return this.model.get("author").id != app.user().id
+  },
+
+  isOnShowPage : function() {
+    return (!this.model.collection) && (this.model.url() == document.location.pathname);
+  },
+
+  destroy : function() {
+    if (this.isOnShowPage()) {
+      document.location.replace(Backbone.history.options.root);
+    }
   }
 });

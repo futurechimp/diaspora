@@ -13,9 +13,7 @@ class ApplicationController < ActionController::Base
 
   inflection_method :grammatical_gender => :gender
 
-  helper_method :notification_count,
-                :unread_message_count,
-                :all_aspects,
+  helper_method :all_aspects,
                 :all_contacts_count,
                 :my_contacts_count,
                 :only_sharing_count,
@@ -37,15 +35,6 @@ class ApplicationController < ActionController::Base
       logged_out_path
     end
   end
-
-  ##helpers
-  def notification_count
-    @notification_count ||= Notification.for(current_user, :unread =>true).size
-  end
-
-  def unread_message_count
-    @unread_message_count ||= ConversationVisibility.sum(:unread, :conditions => "person_id = #{current_user.person.id}")
-  end 
 
   def all_aspects
     @all_aspects ||= current_user.aspects
@@ -82,13 +71,14 @@ class ApplicationController < ActionController::Base
     else
       locale = request.preferred_language_from AVAILABLE_LANGUAGE_CODES
       locale ||= request.compatible_language_from AVAILABLE_LANGUAGE_CODES
+      locale ||= DEFAULT_LANGUAGE
       I18n.locale = locale
     end
   end
 
   def redirect_unless_admin
     unless current_user.admin?
-      redirect_to explore_url, :notice => 'you need to be an admin to do that'
+      redirect_to stream_url, :notice => 'you need to be an admin to do that'
       return
     end
   end
@@ -116,7 +106,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    stored_location_for(:user) || (current_user.getting_started? ? getting_started_path : explore_path)
+    stored_location_for(:user) || (current_user.getting_started? ? getting_started_path : stream_path)
   end
 
   def max_time

@@ -3,7 +3,6 @@
 #   the COPYRIGHT file.
 
 class UsersController < ApplicationController
-  require File.join(Rails.root, 'lib/diaspora/ostatus_builder')
   require File.join(Rails.root, 'lib/diaspora/exporter')
   require File.join(Rails.root, 'lib/collect_user_photos')
 
@@ -87,7 +86,7 @@ class UsersController < ApplicationController
     if params[:user] && params[:user][:current_password] && current_user.valid_password?(params[:user][:current_password])
       current_user.close_account!
       sign_out current_user
-      redirect_to(explore_path, :notice => I18n.t('users.destroy.success'))
+      redirect_to(stream_path, :notice => I18n.t('users.destroy.success'))
     else
       if params[:user].present? && params[:user][:current_password].present?
         flash[:error] = t 'users.destroy.wrong_password'
@@ -99,19 +98,16 @@ class UsersController < ApplicationController
   end
 
   def public
-    if user = User.find_by_username(params[:username])
+    if @user = User.find_by_username(params[:username])
       respond_to do |format|
         format.atom do
-          posts = StatusMessage.where(:author_id => user.person.id, :public => true).order('created_at DESC').limit(25)
-          director = Diaspora::Director.new
-          ostatus_builder = Diaspora::OstatusBuilder.new(user, posts)
-          render :xml => director.build(ostatus_builder), :content_type => 'application/atom+xml'
+          @posts = StatusMessage.where(:author_id => @user.person.id, :public => true).order('created_at DESC').limit(25)
         end
 
-        format.any { redirect_to person_path(user.person) }
+        format.any { redirect_to person_path(@user.person) }
       end
     else
-      redirect_to explore_path, :error => I18n.t('users.public.does_not_exist', :username => params[:username])
+      redirect_to stream_path, :error => I18n.t('users.public.does_not_exist', :username => params[:username])
     end
   end
 
@@ -127,14 +123,14 @@ class UsersController < ApplicationController
   def logged_out
     @page = :logged_out
     if user_signed_in?
-      redirect_to explore_path
+      redirect_to stream_path
     end
   end
 
   def getting_started_completed
     user = current_user
     user.update_attributes(:getting_started => false)
-    redirect_to explore_path
+    redirect_to stream_path
   end
 
   def export

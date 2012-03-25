@@ -5,13 +5,17 @@
 class Post < ActiveRecord::Base
   include ApplicationHelper
 
+  include Diaspora::Federated::Shareable
+
   include Diaspora::Likeable
   include Diaspora::Commentable
   include Diaspora::Shareable
 
+
   has_many :participations, :dependent => :delete_all, :as => :target
 
-  attr_accessor :user_like
+  attr_accessor :user_like,
+                :user_participation
 
   # NOTE API V1 to be extracted
   acts_as_api
@@ -36,6 +40,7 @@ class Post < ActiveRecord::Base
     t.add :root
     t.add :o_embed_cache
     t.add :user_like
+    t.add :user_participation
     t.add :mentioned_people
     t.add :photos
     t.add :nsfw
@@ -66,6 +71,21 @@ class Post < ActiveRecord::Base
     joins(:likes).where(:likes => {:author_id => person.id})
   }
 
+  def self.next(post)
+    where("posts.created_at > ?", post.created_at).order('posts.created_at ASC').first
+  end
+
+  def self.previous(post)
+    where("posts.created_at < ?", post.created_at).order('posts.created_at DESC').first
+  end
+
+  def self.visible_from_author(author, current_user=nil)
+    if current_user.present?
+      current_user.posts_from(author)
+    else
+      author.posts.all_public
+    end
+  end
   def post_type
     self.class.name
   end

@@ -9,7 +9,7 @@ describe("app.views.LikesInfo", function(){
       }
     })
 
-    var posts = $.parseJSON(spec.readFixture("explore_json"))["posts"];
+    var posts = $.parseJSON(spec.readFixture("stream_json"))["posts"];
     this.post = new app.models.Post(posts[0]); // post with a like
     this.view = new app.views.LikesInfo({model: this.post});
   });
@@ -27,6 +27,12 @@ describe("app.views.LikesInfo", function(){
       this.view.render();
 
       expect($(this.view.el).html().trim()).toBe("");
+    })
+
+    it("fires on a model change", function(){
+      spyOn(this.view, "postRenderTemplate")
+      this.view.model.trigger('expandedLikes')
+      expect(this.view.postRenderTemplate).toHaveBeenCalled()
     })
   })
 

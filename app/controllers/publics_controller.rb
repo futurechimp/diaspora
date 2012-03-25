@@ -12,21 +12,20 @@ class PublicsController < ApplicationController
   # We use newrelic_ignore to prevent artifical RPM bloat; however,
   # I am commenting this line out for the time being to debug some apparent
   # issues on Heroku.
-  # 
+  #
   # newrelic_ignore if EnviromentConfiguration.using_new_relic?
 
   skip_before_filter :set_header_data
   skip_before_filter :set_grammatical_gender
-  before_filter :allow_cross_origin, :only => [:hcard, :host_meta, :webfinger]
   before_filter :check_for_xml, :only => [:receive, :receive_public]
   before_filter :authenticate_user!, :only => [:index]
 
   respond_to :html
   respond_to :xml, :only => :post
 
+  caches_page :host_meta, :if => Proc.new{ Rails.env == 'production'}
 
   layout false
-  caches_page :host_meta
 
   def hcard
     @person = Person.find_by_guid_and_closed_account(params[:guid], false)
@@ -50,6 +49,7 @@ class PublicsController < ApplicationController
       return
     end
 
+    FEDERATION_LOGGER.info("webfinger profile request for :#{@person.id}")
     render 'webfinger', :content_type => 'application/xrd+xml'
   end
 
@@ -58,6 +58,7 @@ class PublicsController < ApplicationController
   end
 
   def receive_public
+    FEDERATION_LOGGER.info("recieved a public message")
     Resque.enqueue(Jobs::ReceiveUnencryptedSalmon, CGI::unescape(params[:xml]))
     render :nothing => true, :status => :ok
   end
@@ -72,16 +73,12 @@ class PublicsController < ApplicationController
     end
 
     @user = person.owner
+
+    FEDERATION_LOGGER.info("recieved a private message for user:#{@user.id}")
     Resque.enqueue(Jobs::ReceiveEncryptedSalmon, @user.id, CGI::unescape(params[:xml]))
 
     render :nothing => true, :status => 202
   end
-
-
-  def allow_cross_origin
-    headers["Access-Control-Allow-Origin"] = "*"
-  end
-
 
 
   private

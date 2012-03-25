@@ -3,15 +3,14 @@
 #   the COPYRIGHT file.
 
 Diaspora::Application.routes.draw do
-
   # Posting and Reading
-
   resources :reshares
 
   resources :status_messages, :only => [:new, :create]
 
   resources :posts, :only => [:show, :destroy] do
     resources :likes, :only => [:create, :destroy, :index]
+    resources :participations, :only => [:create, :destroy, :index]
     resources :comments, :only => [:new, :create, :destroy, :index]
   end
   get 'p/:id' => 'posts#show', :as => 'short_post'
@@ -21,14 +20,18 @@ Diaspora::Application.routes.draw do
   end
 
   # Streams
-  get "participate" => "streams#participate", :as => "participate"
-  get "explore" => "streams#multi", :as => "explore"
+  get "participate" => "streams#activity", :as => "activity_stream" # legacy
+  get "explore" => "streams#multi", :as => "stream"                 # legacy
+
+  get "activity" => "streams#activity", :as => "activity_stream"
+  get "stream" => "streams#multi", :as => "stream"
   get "public" => "streams#public", :as => "public_stream"
   get "followed_tags" => "streams#followed_tags", :as => "followed_tags_stream"
   get "mentions" => "streams#mentioned", :as => "mentioned_stream"
   get "liked" => "streams#liked", :as => "liked_stream"
   get "commented" => "streams#commented", :as => "commented_stream"
   get "aspects" => "streams#aspects", :as => "aspects_stream"
+  
 
   resources :aspects do
     put :toggle_contact_visibility
@@ -93,12 +96,14 @@ Diaspora::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :password      => "devise/passwords",
-                                      :sessions      => "sessions",
-                                      :invitations   => "invitations"} do
-    get 'invitations/resend/:id' => 'invitations#resend', :as => 'invitation_resend'
-    get 'invitations/email' => 'invitations#email', :as => 'invite_email'
-  end
+                                      :sessions      => "sessions"}
 
+  #legacy routes to support old invite routes
+  get 'users/invitation/accept' => 'invitations#edit'
+  get 'invitations/email' => 'invitations#email', :as => 'invite_email'
+  get 'users/invitations' => 'invitations#new', :as => 'new_user_invitation'
+  post 'users/invitations' => 'invitations#create', :as => 'new_user_invitation'
+  
   get 'login' => redirect('/users/sign_in')
 
   scope 'admins', :controller => :admins do
@@ -107,6 +112,7 @@ Diaspora::Application.routes.draw do
     get   :weekly_user_stats
     get   :correlations
     get   :stats, :as => 'pod_stats'
+    get   "add_invites/:invite_code_id" => 'admins#add_invites', :as => 'add_invites'
   end
 
   resource :profile, :only => [:edit, :update]
@@ -118,13 +124,19 @@ Diaspora::Application.routes.draw do
   resources :share_visibilities,  :only => [:update]
   resources :blocks, :only => [:create, :destroy]
 
-  get 'community_spotlight' => "contacts#spotlight", :as => 'community_spotlight'
+  get 'i/:id' => 'invitation_codes#show', :as => 'invite_code'
 
+  get 'people/refresh_search' => "people#refresh_search"
   resources :people, :except => [:edit, :update] do
     resources :status_messages
     resources :photos
-    get  :contacts
+    get :contacts
     get "aspect_membership_button" => :aspect_membership_dropdown, :as => "aspect_membership_button"
+
+    member do
+      get :last_post
+    end
+
     collection do
       post 'by_handle' => :retrieve_remote, :as => 'person_by_handle'
       get :tag_index
@@ -132,6 +144,8 @@ Diaspora::Application.routes.draw do
   end
   get '/u/:username' => 'people#show', :as => 'user_profile'
   get '/u/:username/profile_photo' => 'users#user_photo'
+
+
   # Federation
 
   controller :publics do
@@ -177,7 +191,7 @@ Diaspora::Application.routes.draw do
     end
   end
 
-
+  get 'community_spotlight' => "contacts#spotlight", :as => 'community_spotlight'
   # Mobile site
 
   get 'mobile/toggle', :to => 'home#toggle_mobile', :as => 'toggle_mobile'

@@ -2,7 +2,7 @@
 
   {{#if current_user}}
     <div class="controls">
-      {{#if authorIsCurrentUser}}
+      {{#if authorIsNotCurrentUser}}
         <a href="#" rel=nofollow>
           <img src="{{imageUrl "/images/icons/ignoreuser.png"}}"" alt="Ignoreuser" class="block_user control_icon" title="{{t "ignore"}}" />
         </a>
@@ -19,7 +19,7 @@
 
   {{#with author}}
     <a href="/people/{{guid}}" class="img">
-      <img src="{{avatar.small}}" class="avatar" />
+      {{{personImage this}}}
     </a>
   {{/with}}
 
@@ -44,24 +44,37 @@
       </span>
     </div>
 
-    {{#if nsfw}}
-      <div class="shield_wrapper">
-        <div class="shield">
-          {{t "stream.nsfw"}}
-          <a href="#">
-            {{t "stream.show"}}
-          </a>
-        </div>
-    {{/if}}
+    {{#if showPost}}
+        {{#if nsfw}}
+          <div class="nsfw_off">
+            <strong>
+              #NSFW
+            </strong>
+            |
+            <a href="#" class="toggle_nsfw_state">
+                {{t "stream.hide_nsfw_posts"}}
+            </a>
+          </div>
+        {{/if}}
+      <div class="post-content"> </div>
 
-    <div class="post-content"> </div>
-
-    {{#if nsfw}}
+      <div class="feedback"> </div>
+      <div class="likes"> </div>
+      <div class="comments"> </div>
+    {{else}}
+      <div class="nsfw-shield">
+        <strong>
+          #NSFW
+        </strong>
+        |
+        <a href="#" class="show_nsfw_post">
+          {{t "stream.show_nsfw_post"}}
+        </a>
+        |
+        <a href="#" class="toggle_nsfw_state">
+          {{t "stream.show_nsfw_posts"}}
+        </a>
       </div>
     {{/if}}
-
-    <div class="feedback"> </div>
-    <div class="likes"> </div>
-    <div class="comments"> </div>
 
   </div>
